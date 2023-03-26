@@ -115,97 +115,24 @@ const icons = [
 
 
 const cardContainer = document.querySelector('.gs-card-container');
-printAnimals()
-printVegetables()
-printUsers()
+printRightCard('animal')
+printRightCard('vegetable')
+printRightCard('user')
 
 const selectEl = document.getElementById("type")
 
 selectEl.addEventListener("change", function(){
     const selectedValue = selectEl.value;
     cardContainer.innerHTML = ''
-    switch(selectedValue){
-        case 'Users' :
-            printUsers()
-            console.log("User")
-            break;
-        case'Animals':
-            printAnimals()
-            console.log("Anim")
-            break;
-        case 'Vegetables':
-            printVegetables()
-            console.log("Veg")
-            break;
-        default:
-            printAnimals()
-            printVegetables()
-            printUsers()
-            console.log("User")
-    
+    if(selectedValue =='all'){
+        printRightCard('animal')
+        printRightCard('vegetable')
+        printRightCard('user')
+    }else{
+        printRightCard(selectedValue)
     }
-
-
-})
-
-function printAnimals(){
-    let cardBlocks = [];
-    icons.forEach(icon => {
-       if(icon.type == 'animal'){
-            const color = rdColor()
-            const card = document.createElement('div')
-            card.className = "card bg-info gs-card d-flex flex-column align-items-center py-3"
-            card.innerHTML =
-            ` 
-                <i class="${icon.prefix}${icon.family}  ${icon.prefix}${icon.name} fs-2 " style = "color: ${color}"></i>
-                <p id="i-name" class="text-uppercase m-0">${icon.name}</p>
-            `;
-            cardBlocks.push(card.outerHTML);
-        } 
-
-    });
-    cardContainer.innerHTML += cardBlocks.join('')
     
-}
-
-function printVegetables(){
-    let cardBlocks = [];
-    icons.forEach(icon => {
-       if(icon.type == 'vegetable'){
-            const color = rdColor()
-            const card = document.createElement('div')
-            card.className = "card bg-info gs-card d-flex flex-column align-items-center py-3"
-            card.innerHTML =
-            ` 
-                <i class=" ${icon.prefix}${icon.family}  ${icon.prefix}${icon.name} fs-2 " style = "color: ${color}"></i>
-                <p id="i-name" class="text-uppercase m-0">${icon.name}</p>
-            `;
-            cardBlocks.push(card.outerHTML);
-        } 
-
-    });
-    cardContainer.innerHTML += cardBlocks.join('')
-}
-
-function printUsers(){
-    let cardBlocks = [];
-    icons.forEach(icon => {
-       if(icon.type == 'user'){
-            const color = rdColor()
-            const card = document.createElement('div')
-            card.className = "card bg-info gs-card d-flex flex-column align-items-center py-3"
-            card.innerHTML =
-            ` 
-                <i class=" ${icon.prefix}${icon.family}  ${icon.prefix}${icon.name} fs-2 " style = "color: ${color}"></i>
-                <p id="i-name" class="text-uppercase m-0">${icon.name}</p>
-            `;
-            cardBlocks.push(card.outerHTML);
-        } 
-
-    });
-    cardContainer.innerHTML += cardBlocks.join('')
-}
-
+})
 
 
 function rdColor(){
@@ -216,4 +143,23 @@ function rdColor(){
         hexCode += hexDigits[Math.floor(Math.random() * 16)];
     }
     return hexCode;
+}
+
+function printRightCard(type){
+    let cardBlocks = [];
+    icons.forEach(icon => {
+       if(icon.type == type){
+            const color = rdColor()
+            const card = document.createElement('div')
+            card.className = "card bg-info gs-card d-flex flex-column align-items-center py-3"
+            card.innerHTML =
+            ` 
+                <i class=" ${icon.prefix}${icon.family}  ${icon.prefix}${icon.name} fs-2 " style = "color: ${color}"></i>
+                <p id="i-name" class="text-uppercase m-0">${icon.name}</p>
+            `;
+            cardBlocks.push(card.outerHTML);
+        } 
+
+    });
+    cardContainer.innerHTML += cardBlocks.join('')
 }
