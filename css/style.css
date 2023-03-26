@@ -1,0 +1,4 @@
+.gs-card{
+    width: calc((100% / 5) - 3rem) ;
+    min-width:100px;
+}
