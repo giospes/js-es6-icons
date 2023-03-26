@@ -113,15 +113,19 @@ const icons = [
     }
 ];
 
+
+const cardContainer = document.querySelector('.gs-card-container');
 printAnimals()
 printVegetables()
 printUsers()
 
 const selectEl = document.getElementById("type")
+
 selectEl.addEventListener("change", function(){
     const selectedValue = selectEl.value;
+    cardContainer.innerHTML = ''
     switch(selectedValue){
-        case 'User' :
+        case 'Users' :
             printUsers()
             console.log("User")
             break;
@@ -145,7 +149,22 @@ selectEl.addEventListener("change", function(){
 })
 
 function printAnimals(){
+    let cardBlocks = [];
+    icons.forEach(icon => {
+       if(icon.type == 'animal'){
+            const card = document.createElement('div')
+            card.className = "card bg-info gs-card d-flex flex-column align-items-center py-3"
+            card.innerHTML =
+            ` 
+                <i class="fa-solid fa-house ${icon.prefix}${icon.family}  ${icon.prefix}${icon.name} fs-2 "></i>
+                <p id="i-name" class="text-uppercase m-0">${icon.name}</p>
+            `;
+            cardBlocks.push(card.outerHTML);
+        } 
 
+    });
+    cardContainer.innerHTML = cardBlocks.join('')
+    
 }
 function printVegetables(){
 
