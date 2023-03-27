@@ -115,19 +115,24 @@ const icons = [
 
 
 const cardContainer = document.querySelector('.gs-card-container');
-printRightCard('animal')
-printRightCard('vegetable')
-printRightCard('user')
-
 const selectEl = document.getElementById("type")
+const options = selectEl.options
+
+for (let i = 0; i < options.length; i++) {
+    const optionValue = options[i].value;
+    printRightCard(optionValue)
+}
+
+
 
 selectEl.addEventListener("change", function(){
     const selectedValue = selectEl.value;
     cardContainer.innerHTML = ''
     if(selectedValue =='all'){
-        printRightCard('animal')
-        printRightCard('vegetable')
-        printRightCard('user')
+        for (let i = 0; i < options.length; i++) {
+            const optionValue = options[i].value;
+            printRightCard(optionValue)
+        }
     }else{
         printRightCard(selectedValue)
     }
